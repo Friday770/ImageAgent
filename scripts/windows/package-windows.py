@@ -21,6 +21,14 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def source_commit(project: Path) -> str | None:
+    try:
+        result = subprocess.run(['git', 'rev-parse', 'HEAD'], cwd=project, capture_output=True, text=True, check=False)
+        return result.stdout.strip() if result.returncode == 0 else None
+    except OSError:
+        return None
+
+
 def machine(path: Path) -> int:
     with path.open('rb') as stream:
         if stream.read(2) != b'MZ':
@@ -98,7 +106,7 @@ def main() -> None:
         notices = project / 'windows/licenses'
         if notices.is_dir():
             shutil.copytree(notices, folder / 'licenses', dirs_exist_ok=True)
-        info = {'application': 'ImageAgent', 'version': args.version, 'build': args.build, 'runtime': args.rid, 'sourceCommit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=project, text=True).strip(), 'selfContained': True, 'windowsRuntimeExecution': 'not executed on the macOS build host', 'authenticodeSigned': False}
+        info = {'application': 'ImageAgent', 'version': args.version, 'build': args.build, 'runtime': args.rid, 'sourceCommit': source_commit(project), 'selfContained': True, 'windowsRuntimeExecution': 'not executed on the macOS build host', 'authenticodeSigned': False}
         (folder / 'BUILDINFO.json').write_text(json.dumps(info, ensure_ascii=False, indent=2) + '\n')
         files = sorted(path for path in folder.rglob('*') if path.is_file())
         (folder / 'SHA256SUMS.txt').write_text(''.join(f'{sha256(path)}  {path.relative_to(folder).as_posix()}\n' for path in files))
