@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><AssemblyName>ImageAgentDiagnostics</AssemblyName><Version>1.5.0</Version></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../ImageAgent.Core/ImageAgent.Core.csproj" />
+    <Content Include="../licenses/**" Link="licenses/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../README.md" Link="README-Windows.md" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

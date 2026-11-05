@@ -1,0 +1,6 @@
+{
+  "api_url": "https://api.example.com/v1",
+  "api_key": "YOUR_API_KEY",
+  "planner_model": "gpt-6.1-sol",
+  "image_model": "gpt-image-2"
+}

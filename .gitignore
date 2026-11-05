@@ -1,0 +1,47 @@
+.build/
+.swiftpm/
+dist/
+artifacts/
+.DS_Store
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+.env
+.env.*
+_bmad/
+windows/**/bin/
+windows/**/obj/
+windows/**/TestResults/
+windows/.vs/
+
+# Local tooling, diagnostics and offline previews
+__pycache__/
+*.py[cod]
+.venv/
+TestResults/
+*.log
+*.preview.json
+offline-credential-markers.json
+
+# Signing identities and private key material stay outside the repository
+*.p12
+*.pfx
+*.key
+*.mobileprovision
+
+# Local assistant and planning artifacts
+.codex/
+.agents/
+_bmad-output/
+docs/superpowers/
+AGENTS.md
+CLAUDE.md
+
+# Runtime databases and user media
+*.db
+*.db-wal
+*.db-shm
+/assets/
+/recovery/
+/exports/
+!windows/ParityFixtures/**
